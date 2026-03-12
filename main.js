@@ -58,11 +58,11 @@ async function checkStatesCreationNeeded(){
     await checkStateCreationNeeded('lastMonthData');
     await checkStateCreationNeeded('lastDayData');
 
-    if (adapter.config.currentPowerFlow) {
+    /*if (adapter.config.currentPowerFlow) {
         await checkStateCreationNeeded('currentFlowGrid');
         await checkStateCreationNeeded('currentFlowLoad');
         await checkStateCreationNeeded('currentFlowPv');
-    }
+    }*/
 }
 
 async function main() {
@@ -198,13 +198,13 @@ async function main() {
                 adapter.log.warn(`Response has no valid content. Check your data and try again. ${response.statusCode}`);
             }
 
-            if (adapter.config.currentPowerFlow) {
+            /*if (adapter.config.currentPowerFlow) {
                 const url = `https://monitoringapi.solaredge.com/site/${siteid}/currentPowerFlow.json?api_key=${apikey}`;
 
                 await checkStatesCreationNeeded();
 
                 const response = await axios(url);
-                if (response.data) {
+                 if (response.data) {
                     const powerFlow = response.data.siteCurrentPowerFlow;
                     if (powerFlow) {
                         await adapter.setStateChangedAsync(`${siteid}.currentFlowGrid`, powerFlow.GRID ? powerFlow.GRID.currentPower : 0, true);
@@ -212,7 +212,7 @@ async function main() {
                         await adapter.setStateChangedAsync(`${siteid}.currentFlowPv`, powerFlow.PV ? powerFlow.PV.currentPower : 0, true);
                     }
                 }
-            }
+            }*/
         } catch (error) {
             adapter.log.error(`Cannot read data from solaredge cloud: ${error.response && error.response.data ?
                 JSON.stringify(error.response.data) : (error.response && error.response.status ? error.response.status : error)}`);
