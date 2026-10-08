@@ -53,7 +53,7 @@ class Solaredge extends utils.Adapter {
      */
     async getSolarEdgeData() {
         // API v2 verlangt Plural "sites" und den Key im Header
-        const url = `https://solaredge.com{this.config.siteid}/overview`;
+        const url = 'https://solaredge.com' + this.config.siteid + '/overview';
 
         this.log.debug(`Rufe SolarEdge v2 API auf: ${url}`);
 
