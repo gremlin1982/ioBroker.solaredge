@@ -1,7 +1,7 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const axios = require('axios').default; // Wechsel von der alten Bibliothek zu axios für API v2
+const axios = require('axios'); // Wechsel von der alten Bibliothek zu axios für API v2
 
 class Solaredge extends utils.Adapter {
 
