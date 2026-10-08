@@ -1,7 +1,7 @@
 'use strict';
 
 const utils = require('@iobroker/adapter-core');
-const axios = require('axios'); // Wechsel von der alten Bibliothek zu axios für API v2
+const axios = require('axios');
 
 class Solaredge extends utils.Adapter {
 
@@ -36,7 +36,7 @@ class Solaredge extends utils.Adapter {
             this.log.warn('Das minimale Abfrageintervall für die Cloud beträgt 15 Minuten. Wert wurde angepasst.');
             checkInterval = 15;
         }
-        
+
         const intervalMs = checkInterval * 60 * 1000;
 
         // Erste Abfrage direkt beim Start
@@ -54,7 +54,7 @@ class Solaredge extends utils.Adapter {
     async getSolarEdgeData() {
         // API v2 verlangt Plural "sites" und den Key im Header
         const url = `https://solaredge.com{this.config.siteid}/overview`;
-        
+
         this.log.debug(`Rufe SolarEdge v2 API auf: ${url}`);
 
         try {
@@ -72,7 +72,7 @@ class Solaredge extends utils.Adapter {
 
                 // Datenpunkte schreiben (erstellt sie falls nicht vorhanden)
                 await this.setStateChangedAsync('lastUpdateTime', { val: overview.lastUpdateTime, ack: true });
-                
+
                 if (overview.currentPower) {
                     await this.setStateChangedAsync('currentPower', { val: parseFloat(overview.currentPower.power), ack: true });
                 }
