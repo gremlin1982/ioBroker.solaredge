@@ -38,9 +38,11 @@ class Solaredge extends utils.Adapter {
         }, intervalMs);
     }
 
-    async getSolarEdgeData() {
+        async getSolarEdgeData() {
         const s = String.fromCharCode(47);
-        const url = 'https:' + s + s + 'api.solaredge.com' + s + 'v2' + s + 'sites' + s + this.config.siteid + s + 'overview';
+        // Wir setzen den Pfad auf den neuen v2-Standard um:
+        const url = 'https:' + s + s + 'api.solaredge.com' + s + 'v2' + s + 'sites' + s + 'overview';
+
 
         this.log.debug(`Rufe SolarEdge v2 API auf: ${url}`);
 
