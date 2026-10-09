@@ -42,7 +42,7 @@ class Solaredge extends utils.Adapter {
         // Stückelung, damit die URL absolut sicher und unmanipuliert auf GitHub ankommt
         const host = 'https://api.solaredge.com';
         const route = '/v2/sites/data/overview';
-        
+
         // In API v2 wird die Site-ID per Query (?siteIds=...) angehängt
         const url = host + route + '?siteIds=' + this.config.siteid;
 
