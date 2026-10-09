@@ -1,7 +1,7 @@
 {
   "common": {
     "name": "solaredge",
-    "version": "1.4.2",
+    "version": "1.4.3",
     "news": {
       "1.4.2": {
         "en": "Migrated to SolarEdge API v2",
