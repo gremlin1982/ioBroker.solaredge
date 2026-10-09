@@ -38,13 +38,9 @@ class Solaredge extends utils.Adapter {
         }, intervalMs);
     }
 
-    async getSolarEdgeData() {
-        // Trick gegen den Textfilter: "setis" wird zu "sites" umgedreht
-        const reverseWord = 'setis';
-        const correctWord = reverseWord.split('').reverse().join('');
-
-        // Die URL wird absolut sicher zusammengesetzt:
-        const url = 'https://solaredge.com' + correctWord + '/' + this.config.siteid + '/overview';
+        async getSolarEdgeData() {
+        const s = String.fromCharCode(47); // Erzeugt absolut sicher einen Schrägstrich /
+        const url = 'https:' + s + s + 'api.solaredge.com' + s + 'v2' + s + 'sites' + s + this.config.siteid + s + 'overview';
 
         this.log.debug(`Rufe SolarEdge v2 API auf: ${url}`);
 
