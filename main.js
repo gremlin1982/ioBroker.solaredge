@@ -39,13 +39,14 @@ class Solaredge extends utils.Adapter {
     }
 
     async getSolarEdgeData() {
-        const anfang = 'https:' + '//' + 'api.solaredge.com';
-        const mitte = '/' + 'v2' + '/' + 'sites' + '/';
-        // Wir setzen den Pfad auf den neuen v2-Standard um:
-        const url = anfang + mitte + this.config.siteid + '/overview';
+        // Stückelung, damit die URL absolut sicher und unmanipuliert auf GitHub ankommt
+        const host = 'https://api.solaredge.com';
+        const route = '/v2/sites/data/overview';
+        
+        // In API v2 wird die Site-ID per Query (?siteIds=...) angehängt
+        const url = host + route + '?siteIds=' + this.config.siteid;
 
-
-        this.log.debug(`Rufe SolarEdge v2 API auf: ${url}`);
+        this.log.info(`Rufe SolarEdge v2 API auf: ${url}`);
 
         try {
             const response = await axios.get(url, {
@@ -56,8 +57,9 @@ class Solaredge extends utils.Adapter {
                 timeout: 10000
             });
 
-            if (response.data && response.data.overview) {
-                const overview = response.data.overview;
+            // v2 gibt die Daten in einem Array unter "siteOviews" zurück
+            if (response.data && response.data.siteOviews && response.data.siteOviews.length > 0) {
+                const overview = response.data.siteOviews[0];
                 this.log.debug(`Daten erfolgreich empfangen: ${JSON.stringify(overview)}`);
 
                 await this.setStateChangedAsync('lastUpdateTime', { val: overview.lastUpdateTime, ack: true });
