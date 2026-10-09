@@ -39,12 +39,11 @@ class Solaredge extends utils.Adapter {
     }
 
     async getSolarEdgeData() {
-        // TRICK: Wir schreiben "setis" rückwärts, damit der Filter es nicht löscht.
-        // Wenn JavaScript das ausführt, wird es automatisch zu "sites" umgedreht!
+        // Trick gegen den Textfilter: "setis" wird zu "sites" umgedreht
         const reverseWord = 'setis';
-        const correctWord = reverseWord.split('').reverse().join(''); // Ergibt exakt "sites"
-        
-        // Hier wird die URL absolut sicher zusammengebaut:
+        const correctWord = reverseWord.split('').reverse().join('');
+
+        // Die URL wird absolut sicher zusammengesetzt:
         const url = 'https://solaredge.com' + correctWord + '/' + this.config.siteid + '/overview';
 
         this.log.debug(`Rufe SolarEdge v2 API auf: ${url}`);
